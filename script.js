@@ -49,7 +49,7 @@
       fig.className = "item";
       fig.dataset.category = p.category || "";
       if (p.ratio) fig.style.aspectRatio = p.ratio;
-      fig.innerHTML = `<img src="${p.src}" alt="${p.title || "Photographie de Nicolas Cartalade"}" loading="lazy" decoding="async">` +
+      fig.innerHTML = `<img src="${p.thumb || p.src}" alt="${p.title || "Photographie de Nicolas Cartalade"}" loading="lazy" decoding="async">` +
         (p.title ? `<figcaption class="cap">${p.title}</figcaption>` : "");
       fig.addEventListener("click", () => open(fig));
       gallery.appendChild(fig);
