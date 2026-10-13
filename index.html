@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nicolas Cartalade — Photographe · Clermont-Ferrand</title>
+  <meta name="description" content="Portfolio de Nicolas Cartalade, photographe basé à Clermont-Ferrand, en Auvergne. Photographies réalisées au Canon EOS R8.">
+  <meta name="author" content="Nicolas Cartalade">
+  <meta property="og:title" content="Nicolas Cartalade — Photographe">
+  <meta property="og:description" content="Portfolio photographique · Clermont-Ferrand, Auvergne">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0b0b0b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header" id="header">
+    <a href="#top" class="brand">Nicolas Cartalade</a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">À propos</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.instagram.com/nicolas_delacarta/" target="_blank" rel="noopener" class="nav-insta" aria-label="Instagram">Instagram ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <section class="hero" id="hero">
+      <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Photographe · Clermont-Ferrand, Auvergne</p>
+        <h1>Nicolas<br><em>Cartalade</em></h1>
+        <a href="#portfolio" class="scroll-cue">Découvrir le portfolio <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+      <div class="section-head">
+        <p class="eyebrow">Sélection</p>
+        <h2>Portfolio</h2>
+      </div>
+      <div class="filters" id="filters" aria-label="Filtres par catégorie"></div>
+      <div class="gallery" id="gallery"></div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-inner">
+        <div class="about-title">
+          <p class="eyebrow">À propos</p>
+          <h2>Regarder,<br><em>puis attendre la lumière.</em></h2>
+        </div>
+        <div class="about-text">
+          <p>Je m'appelle Nicolas Cartalade, photographe originaire de Clermont-Ferrand, au cœur de l'Auvergne. Entre volcans, ciels changeants et rues de basalte, ma région est un terrain de jeu qui ne cesse de me surprendre.</p>
+          <p>Je photographie avec un Canon EOS R8, en cherchant des images sobres, justes, où la lumière et l'instant comptent plus que l'effet.</p>
+          <dl class="facts">
+            <div><dt>Basé à</dt><dd>Clermont-Ferrand, France</dd></div>
+            <div><dt>Matériel</dt><dd>Canon EOS R8</dd></div>
+            <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/nicolas_delacarta/" target="_blank" rel="noopener">@nicolas_delacarta</a></dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>Un projet, une collaboration&nbsp;?</h2>
+      <p class="contact-text">Pour toute demande, le plus simple est de m'écrire en message privé sur Instagram.</p>
+      <a class="btn" href="https://www.instagram.com/nicolas_delacarta/" target="_blank" rel="noopener">@nicolas_delacarta ↗</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Nicolas Cartalade — Tous droits réservés. Les photographies ne peuvent être utilisées sans autorisation.</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visionneuse photo">
+    <button class="lb-close" id="lbClose" aria-label="Fermer">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Photo précédente">←</button>
+    <figure class="lb-figure">
+      <img id="lbImg" alt="">
+      <figcaption id="lbCaption"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Photo suivante">→</button>
+  </div>
+
+  <script src="photos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
