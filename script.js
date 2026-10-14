@@ -23,7 +23,13 @@
 
   // Hero
   if (HERO_IMAGE) {
-    document.getElementById("heroBg").style.backgroundImage = `url("${url(HERO_IMAGE)}")`;
+    const heroBg = document.getElementById("heroBg");
+    const pre = new Image();
+    // On lance le zoom arrière seulement quand l'image est chargée et décodée (sinon il saccade).
+    const start = () => { heroBg.style.backgroundImage = `url("${url(HERO_IMAGE)}")`; requestAnimationFrame(() => heroBg.classList.add("ready")); };
+    pre.onload = () => { (pre.decode ? pre.decode().catch(() => {}) : Promise.resolve()).then(start); };
+    pre.onerror = start;
+    pre.src = url(HERO_IMAGE);
   }
 
   // Header au scroll
