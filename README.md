@@ -25,4 +25,4 @@ Les filtres de catégories se créent tout seuls ; les noms anglais des catégor
 
 ## Visibilité
 
-Les deux pages contiennent `<meta name="robots" content="noindex, nofollow">` : le site n'apparaît pas dans les moteurs de recherche. Pour le rendre référençable, supprimer cette ligne dans `index.html` et `en/index.html`. Cela n'empêche pas d'ouvrir le site avec son lien : GitHub Pages ne propose pas de mode privé sur un compte personnel.
+Le site est référençable par les moteurs de recherche (pas de balise `noindex`). Pour le masquer à nouveau, ajouter `<meta name="robots" content="noindex, nofollow">` dans le `<head>` de `index.html` et de `en/index.html`. GitHub Pages ne propose pas de mode privé sur un compte personnel : toute personne ayant le lien peut ouvrir le site.
