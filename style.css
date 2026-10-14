@@ -139,6 +139,8 @@ em { font-style: italic; color: var(--accent); }
 .facts div { display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
 .facts dt { color: var(--muted); text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; align-self: center; }
 .facts dd { margin: 0; }
+.about-text p.funfact { margin: 1.6rem 0 0; font-family: var(--serif); font-style: italic; font-size: .98rem; line-height: 1.5; color: var(--muted); max-width: 52ch; }
+.hgg { margin-left: .5em; font-family: var(--sans); font-style: normal; font-size: .68rem; letter-spacing: .12em; opacity: .55; white-space: nowrap; }
 .facts a { border-bottom: 1px solid var(--accent); }
 
 .about-media { position: absolute; inset: 0; z-index: 0; background: #000; }
