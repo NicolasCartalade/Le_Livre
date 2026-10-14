@@ -95,7 +95,7 @@
       gallery.appendChild(el);
       return { el, h: 0 };
     });
-    visible = items.filter((el) => activeCat === ALL || el.dataset.category === activeCat);
+    visible = items.filter((el) => activeCat === ALL || el._cats.includes(activeCat));
     visible.forEach((el) => {
       const target = cols.reduce((a, b) => (b.h < a.h ? b : a));
       target.el.appendChild(el);
@@ -122,7 +122,7 @@
     PHOTOS.forEach((p) => {
       const fig = document.createElement("figure");
       fig.className = "item";
-      fig.dataset.category = p.category || "";
+      fig._cats = [].concat(p.category || []);
       if (p.ratio) fig.style.aspectRatio = p.ratio;
       const [rw, rh] = String(p.ratio || "3/2").split("/").map(Number);
       fig._ratio = rw / (rh || 1) || 1.5;
@@ -140,7 +140,7 @@
     shuffle(items);
 
     // Filtres
-    const cats = [...new Set(PHOTOS.map((p) => p.category).filter(Boolean))];
+    const cats = [...new Set(PHOTOS.flatMap((p) => [].concat(p.category || [])))];
     if (cats.length > 1) {
       [ALL, ...cats].forEach((c, idx) => {
         const b = document.createElement("button");
