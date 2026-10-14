@@ -94,7 +94,6 @@ const PHOTOS = [
   { src: "images/cadre-dans-le-cadre.jpg", thumb: "images/thumbs/cadre-dans-le-cadre.jpg", title: "Cadre dans le cadre", title_en: "Frame within a frame", category: "Portraits", ratio: "3500/2335" },
   { src: "images/vallee.jpg", thumb: "images/thumbs/vallee.jpg", title: "Vallée", title_en: "Valley", category: "Paysages", ratio: "3500/2333" },
   { src: "images/herbes.jpg", thumb: "images/thumbs/herbes.jpg", title: "Herbes", title_en: "Grasses", category: "Nature", ratio: "1970/3500" },
-  { src: "images/face-aux-sommets.jpg", thumb: "images/thumbs/face-aux-sommets.jpg", title: "Face aux sommets", title_en: "Facing the peaks", category: "Portraits", ratio: "3500/2333" },
   { src: "images/toits-de-pierre.jpg", thumb: "images/thumbs/toits-de-pierre.jpg", title: "Toits de pierre", title_en: "Stone roofs", category: "Paysages", ratio: "3500/2333" },
   { src: "images/crecerelle-en-trois-temps.jpg", thumb: "images/thumbs/crecerelle-en-trois-temps.jpg", title: "Crécerelle en trois temps", title_en: "Kestrel in three stages", category: "Nature", ratio: "2972/1670" },
   { src: "images/a-bord.jpg", thumb: "images/thumbs/a-bord.jpg", title: "À bord", title_en: "On board", category: "Portraits", ratio: "2333/3500" },

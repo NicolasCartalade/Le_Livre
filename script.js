@@ -38,6 +38,26 @@
     });
   }, { rootMargin: "0px 0px -8% 0px" });
 
+  // Chargement des miniatures : un peu avant leur arrivée à l'écran, avec une nouvelle
+  // tentative en cas d'échec (plus fiable que loading="lazy" dans une grille réorganisée).
+  function loadImg(img, tries) {
+    img.onload = () => img.classList.add("loaded");
+    img.onerror = () => {
+      if (tries < 3) setTimeout(() => { img.src = img.dataset.src + "?r=" + tries; loadImg(img, tries + 1); }, 800 * tries);
+      else img.classList.add("loaded");
+    };
+    img.src = img.dataset.src;
+    if (img.complete && img.naturalWidth) img.classList.add("loaded");
+  }
+  const imgIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const img = e.target.querySelector("img");
+      if (img && !img.src) loadImg(img, 1);
+      imgIO.unobserve(e.target);
+    });
+  }, { rootMargin: "1500px 0px" });
+
   let items = [];       // éléments DOM des photos
   let visible = [];     // photos actuellement affichées (ordre de la visionneuse)
   let current = 0;
@@ -93,10 +113,11 @@
       fig._ratio = rw / (rh || 1) || 1.5;
       const title = titleOf(p);
       const fallbackAlt = LANG === "en" ? "Photograph by Nicolas Cartalade" : "Photographie de Nicolas Cartalade";
-      fig.innerHTML = `<img src="${url(p.thumb || p.src)}" alt="${title || fallbackAlt}" loading="lazy" decoding="async">` +
+      fig.innerHTML = `<img data-src="${url(p.thumb || p.src)}" alt="${title || fallbackAlt}" decoding="async">` +
         (title ? `<figcaption class="cap">${title}</figcaption>` : "");
       fig.addEventListener("click", () => open(fig));
       io.observe(fig);
+      imgIO.observe(fig);
       fig._photo = p;
       items.push(fig);
     });
@@ -175,7 +196,7 @@
 
   // Vidéo d'ambiance (À propos) : lue seulement quand elle est visible,
   // et laissée à l'arrêt si le visiteur a demandé de réduire les animations.
-  const vid = document.querySelector(".about-video video");
+  const vid = document.querySelector(".about-media video");
   if (vid) {
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       vid.removeAttribute("autoplay");
