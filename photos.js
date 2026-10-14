@@ -87,7 +87,7 @@ const PHOTOS = [
   { src: "images/lac-au-crepuscule.jpg", thumb: "images/thumbs/lac-au-crepuscule.jpg", title: "Lac au crépuscule", title_en: "Lake at dusk", category: "Paysages", ratio: "2338/1558" },
   { src: "images/rapace-perche.jpg", thumb: "images/thumbs/rapace-perche.jpg", title: "Rapace perché", title_en: "Perched raptor", category: "Nature/Animalier", ratio: "1968/3500" },
   { src: "images/mouvement-i.jpg", thumb: "images/thumbs/mouvement-i.jpg", title: "Mouvement I", title_en: "Motion I", category: "Événement/Soirée", ratio: "3500/2333" },
-  { src: "images/silhouettes.jpg", thumb: "images/thumbs/silhouettes.jpg", title: "Rap derrière le voile", title_en: "Rap behind the veil", category: "Portraits", ratio: "3500/2333" },
+  { src: "images/silhouettes.jpg", thumb: "images/thumbs/silhouettes.jpg", title: "Deux frères du rap", title_en: "Two brothers of rap", category: "Portraits", ratio: "3500/2333" },
   { src: "images/drapeau.jpg", thumb: "images/thumbs/drapeau.jpg", title: "Drapeau dans les montagnes", title_en: "Flag in the mountains", category: "Paysages", ratio: "3500/2333" },
   { src: "images/sur-la-branche.jpg", thumb: "images/thumbs/sur-la-branche.jpg", title: "Rapace perché noir et blanc", title_en: "Perched raptor, black and white", category: "Nature/Animalier", ratio: "2542/2540" },
   { src: "images/mouvement-ii.jpg", thumb: "images/thumbs/mouvement-ii.jpg", title: "Mouvement II", title_en: "Motion II", category: "Événement/Soirée", ratio: "3500/2333" },
