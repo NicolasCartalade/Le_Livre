@@ -30,6 +30,7 @@ const PHOTOS = [
   { src: "images/renverse.jpg", thumb: "images/thumbs/renverse.jpg", title: "Renversé", category: "Ciels", ratio: "3500/2985" },
   { src: "images/studio.jpg", thumb: "images/thumbs/studio.jpg", title: "Studio", category: "Soirées", ratio: "3500/2333" },
   { src: "images/dans-le-miroir.jpg", thumb: "images/thumbs/dans-le-miroir.jpg", title: "Dans le miroir", category: "Rue", ratio: "2333/3500" },
+  { src: "images/lightfall.jpg", thumb: "images/thumbs/lightfall.jpg", title: "Lightfall", category: "Rue", ratio: "1967/3500" },
   { src: "images/grillage.jpg", thumb: "images/thumbs/grillage.jpg", title: "Grillage", category: "Portraits", ratio: "2623/3500" },
   { src: "images/mer-de-nuages-ii.jpg", thumb: "images/thumbs/mer-de-nuages-ii.jpg", title: "Mer de nuages II", category: "Paysages", ratio: "3500/2333" },
   { src: "images/sous-bois.jpg", thumb: "images/thumbs/sous-bois.jpg", title: "Sous-bois", category: "Nature", ratio: "3500/2333" },

@@ -157,5 +157,26 @@
     if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
   });
 
+  // Vidéo d'ambiance (À propos) : lue seulement quand elle est visible,
+  // et laissée à l'arrêt si le visiteur a demandé de réduire les animations.
+  const vid = document.querySelector(".about-video video");
+  if (vid) {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      vid.removeAttribute("autoplay");
+      vid.pause();
+    } else {
+      new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const p = vid.play();
+            if (p && p.catch) p.catch(() => {});
+          } else {
+            vid.pause();
+          }
+        });
+      }, { threshold: 0.25 }).observe(vid);
+    }
+  }
+
   build();
 })();
