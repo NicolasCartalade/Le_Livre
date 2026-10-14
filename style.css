@@ -202,14 +202,12 @@ em { font-style: italic; color: var(--accent); }
   .about-inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
-  .site-header { padding: 1rem var(--pad); }
+  .site-header { padding: 1rem var(--pad); gap: .6rem; }
   .site-header.scrolled { padding-block: .7rem; }
-  .nav { gap: 0; }
-  .nav > a { display: none; }
-  .brand { font-size: 1.15rem; white-space: nowrap; }
-  .lang { padding-left: 0; border-left: 0; gap: 0; }
-  .lang a { padding: .6rem .7rem; font-size: .72rem; }
-  .lang a:last-child { padding-right: 0; }
+  .brand { font-size: clamp(.9rem, 4.4vw, 1.1rem); white-space: nowrap; letter-spacing: .02em; }
+  .nav { gap: clamp(.6rem, 3vw, 1rem); font-size: clamp(.5rem, 2.5vw, .62rem); letter-spacing: .1em; white-space: nowrap; align-items: center; }
+  .nav > a:nth-child(3), .nav .nav-insta { display: none; }
+  .lang { padding-left: clamp(.6rem, 3vw, 1rem); gap: .6rem; }
   .hero-tag { letter-spacing: .18em; font-size: .66rem; line-height: 1.9; }
   .scroll-cue { letter-spacing: .18em; font-size: .68rem; }
 }
