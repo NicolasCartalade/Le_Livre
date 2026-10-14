@@ -25,14 +25,41 @@
     });
   }, { rootMargin: "0px 0px -8% 0px" });
 
-  let items = [];     // éléments DOM des photos réelles
-  let visible = [];   // photos actuellement affichées (pour la navigation)
+  let items = [];       // éléments DOM des photos
+  let visible = [];     // photos actuellement affichées (ordre de la visionneuse)
   let current = 0;
+  let activeCat = "Tout";
+  let colsNow = 0;
+
+  const colCount = () => (window.innerWidth <= 560 ? 1 : window.innerWidth <= 900 ? 2 : 3);
+
+  // Répartit les photos dans les colonnes : ordre de lecture de gauche à droite,
+  // chaque photo va dans la colonne la moins haute.
+  function layout(force) {
+    const n = colCount();
+    if (!force && n === colsNow) return;
+    colsNow = n;
+    gallery.innerHTML = "";
+    gallery.style.setProperty("--cols", n);
+    const cols = Array.from({ length: n }, () => {
+      const el = document.createElement("div");
+      el.className = "col";
+      gallery.appendChild(el);
+      return { el, h: 0 };
+    });
+    visible = items.filter((el) => activeCat === "Tout" || el.dataset.category === activeCat);
+    visible.forEach((el) => {
+      const target = cols.reduce((a, b) => (b.h < a.h ? b : a));
+      target.el.appendChild(el);
+      target.h += 1 / el._ratio + 0.04;
+    });
+  }
 
   function build() {
     gallery.innerHTML = "";
 
     if (!PHOTOS.length) {
+      gallery.style.setProperty("--cols", colCount());
       PLACEHOLDER_RATIOS.forEach((r) => {
         const d = document.createElement("div");
         d.className = "item placeholder";
@@ -44,20 +71,20 @@
       return;
     }
 
-    PHOTOS.forEach((p, i) => {
+    PHOTOS.forEach((p) => {
       const fig = document.createElement("figure");
       fig.className = "item";
       fig.dataset.category = p.category || "";
       if (p.ratio) fig.style.aspectRatio = p.ratio;
+      const [rw, rh] = String(p.ratio || "3/2").split("/").map(Number);
+      fig._ratio = rw / (rh || 1) || 1.5;
       fig.innerHTML = `<img src="${p.thumb || p.src}" alt="${p.title || "Photographie de Nicolas Cartalade"}" loading="lazy" decoding="async">` +
         (p.title ? `<figcaption class="cap">${p.title}</figcaption>` : "");
       fig.addEventListener("click", () => open(fig));
-      gallery.appendChild(fig);
       io.observe(fig);
       fig._photo = p;
       items.push(fig);
     });
-    visible = items.slice();
 
     // Filtres
     const cats = [...new Set(PHOTOS.map((p) => p.category).filter(Boolean))];
@@ -69,21 +96,35 @@
         b.addEventListener("click", () => {
           filtersEl.querySelectorAll("button").forEach((x) => x.classList.remove("active"));
           b.classList.add("active");
-          items.forEach((el) => el.classList.toggle("hidden", idx !== 0 && el.dataset.category !== c));
-          visible = items.filter((el) => !el.classList.contains("hidden"));
+          activeCat = c;
+          layout(true);
         });
         filtersEl.appendChild(b);
       });
     }
+
+    layout(true);
+
+    let t;
+    window.addEventListener("resize", () => {
+      clearTimeout(t);
+      t = setTimeout(() => layout(false), 150);
+    });
   }
 
   // Lightbox
+  function preload(i) {
+    const el = visible[(i + visible.length) % visible.length];
+    if (el) { const im = new Image(); im.src = el._photo.src; }
+  }
   function show(i) {
     current = (i + visible.length) % visible.length;
     const p = visible[current]._photo;
     lbImg.src = p.src;
     lbImg.alt = p.title || "";
-    lbCaption.textContent = p.title || "";
+    lbCaption.textContent = (p.title ? p.title + "  ·  " : "") + (current + 1) + " / " + visible.length;
+    preload(current + 1);
+    preload(current - 1);
   }
   function open(el) {
     current = visible.indexOf(el);

@@ -101,9 +101,10 @@ em { font-style: italic; color: var(--accent); }
 .filters button:hover { color: var(--text); }
 .filters button.active { color: var(--text); border-color: var(--accent); }
 
-.gallery { columns: 3; column-gap: 1.1rem; }
+.gallery { display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 1.1rem; align-items: start; }
+.col { display: flex; flex-direction: column; gap: 1.1rem; min-width: 0; }
 .item {
-  position: relative; break-inside: avoid; margin: 0 0 1.1rem;
+  position: relative; margin: 0;
   overflow: hidden; background: var(--bg-soft); cursor: zoom-in;
   opacity: 0; transform: translateY(24px);
   transition: opacity .9s ease, transform .9s ease;
@@ -171,11 +172,9 @@ em { font-style: italic; color: var(--accent); }
 .lb-next { right: .6rem; }
 
 @media (max-width: 900px) {
-  .gallery { columns: 2; }
   .about-inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
-  .gallery { columns: 1; }
   .nav { gap: 1.1rem; font-size: .68rem; }
   .nav a:nth-child(2) { display: none; }
 }
