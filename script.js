@@ -58,6 +58,15 @@
     });
   }, { rootMargin: "1500px 0px" });
 
+  // Ordre aléatoire (Fisher-Yates) : change à chaque visite et à chaque changement de catégorie.
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const k = Math.floor(Math.random() * (i + 1));
+      [a[i], a[k]] = [a[k], a[i]];
+    }
+    return a;
+  }
+
   let items = [];       // éléments DOM des photos
   let visible = [];     // photos actuellement affichées (ordre de la visionneuse)
   let current = 0;
@@ -122,6 +131,8 @@
       items.push(fig);
     });
 
+    shuffle(items);
+
     // Filtres
     const cats = [...new Set(PHOTOS.map((p) => p.category).filter(Boolean))];
     if (cats.length > 1) {
@@ -133,6 +144,7 @@
           filtersEl.querySelectorAll("button").forEach((x) => x.classList.remove("active"));
           b.classList.add("active");
           activeCat = c;
+          shuffle(items);
           layout(true);
         });
         filtersEl.appendChild(b);
