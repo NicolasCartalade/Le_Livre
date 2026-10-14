@@ -1,23 +1,28 @@
 # Nicolas Cartalade — Portfolio photographe
 
-Site statique (HTML/CSS/JS), sans dépendance, hébergeable gratuitement sur GitHub Pages.
+Site statique (HTML/CSS/JS), sans dépendance, hébergé sur GitHub Pages. Deux langues : français (`index.html`) et anglais (`en/index.html`), avec un sélecteur FR / EN dans l'en-tête.
 
-## Mettre en ligne sur GitHub Pages
+## Structure
 
-1. Crée un dépôt public nommé **`<ton-pseudo-github>.github.io`** (l'adresse du site sera alors `https://<ton-pseudo-github>.github.io`).
-2. Envoie-y tous les fichiers de ce dossier (`index.html`, `style.css`, `script.js`, `photos.js`, `images/`).
-3. Dans **Settings → Pages**, choisis la branche `main` et le dossier `/ (root)`.
-4. Le site est en ligne après une ou deux minutes.
+- `index.html` : page française · `en/index.html` : page anglaise
+- `style.css`, `script.js` : mise en page et comportement (communs aux deux langues)
+- `photos.js` : la liste des photos, leurs titres (FR et EN), les catégories et la photo d'en-tête
+- `images/` : photos en grand format · `images/thumbs/` : miniatures de la grille
+- `video/` : la vidéo en boucle de la section « À propos »
 
-## Ajouter des photos
+## Ajouter ou modifier des photos
 
-1. Place tes images dans le dossier `images/` (JPEG, ~2000 px sur le grand côté, 300–600 Ko chacune pour un site rapide).
-2. Déclare-les dans `photos.js` :
+1. Place l'image grand format dans `images/` (JPEG, ~3500 px sur le grand côté) et sa miniature (~1000 px de large) dans `images/thumbs/`, avec le même nom.
+2. Ajoute une ligne dans `photos.js` (l'ordre des lignes = l'ordre d'affichage) :
 
 ```js
-{ src: "images/volcan-01.jpg", title: "Puy de Dôme", category: "Paysages", ratio: "3/2" },
+{ src: "images/exemple.jpg", thumb: "images/thumbs/exemple.jpg", title: "Exemple", title_en: "Example", category: "Paysages", ratio: "3500/2333" },
 ```
 
-3. Pour la photo d'en-tête, renseigne `HERO_IMAGE` dans `photos.js`.
+3. Photo d'en-tête : `HERO_IMAGE` dans `photos.js`.
 
-Les filtres par catégorie apparaissent automatiquement dès qu'il y a au moins deux catégories.
+Les filtres de catégories se créent tout seuls ; les noms anglais des catégories sont dans `CATEGORY_EN` (`photos.js`).
+
+## Visibilité
+
+Les deux pages contiennent `<meta name="robots" content="noindex, nofollow">` : le site n'apparaît pas dans les moteurs de recherche. Pour le rendre référençable, supprimer cette ligne dans `index.html` et `en/index.html`. Cela n'empêche pas d'ouvrir le site avec son lien : GitHub Pages ne propose pas de mode privé sur un compte personnel.

@@ -6,11 +6,24 @@
   const lbImg = document.getElementById("lbImg");
   const lbCaption = document.getElementById("lbCaption");
 
+  // Langue de la page (<html lang="fr|en">) et dossier de base des fichiers
+  // (la page anglaise est dans /en/, donc elle va chercher les images un niveau plus haut).
+  const LANG = document.documentElement.lang === "en" ? "en" : "fr";
+  const BASE = document.documentElement.getAttribute("data-base") || "";
+  const url = (u) => BASE + u;
+  const titleOf = (p) => (LANG === "en" && p.title_en) || p.title || "";
+  const ALL = "Tout"; // clé interne du filtre « tout »
+  const catLabel = (c) => {
+    if (c === ALL) return LANG === "en" ? "All" : "Tout";
+    if (LANG === "en" && typeof CATEGORY_EN !== "undefined" && CATEGORY_EN[c]) return CATEGORY_EN[c];
+    return c;
+  };
+
   document.getElementById("year").textContent = new Date().getFullYear();
 
   // Hero
   if (HERO_IMAGE) {
-    document.getElementById("heroBg").style.backgroundImage = `url("${HERO_IMAGE}")`;
+    document.getElementById("heroBg").style.backgroundImage = `url("${url(HERO_IMAGE)}")`;
   }
 
   // Header au scroll
@@ -28,7 +41,7 @@
   let items = [];       // éléments DOM des photos
   let visible = [];     // photos actuellement affichées (ordre de la visionneuse)
   let current = 0;
-  let activeCat = "Tout";
+  let activeCat = ALL;
   let colsNow = 0;
 
   const colCount = () => (window.innerWidth <= 560 ? 1 : window.innerWidth <= 900 ? 2 : 3);
@@ -47,7 +60,7 @@
       gallery.appendChild(el);
       return { el, h: 0 };
     });
-    visible = items.filter((el) => activeCat === "Tout" || el.dataset.category === activeCat);
+    visible = items.filter((el) => activeCat === ALL || el.dataset.category === activeCat);
     visible.forEach((el) => {
       const target = cols.reduce((a, b) => (b.h < a.h ? b : a));
       target.el.appendChild(el);
@@ -64,7 +77,7 @@
         const d = document.createElement("div");
         d.className = "item placeholder";
         d.style.aspectRatio = r;
-        d.textContent = "Photo à venir";
+        d.textContent = LANG === "en" ? "Photo coming soon" : "Photo à venir";
         gallery.appendChild(d);
         io.observe(d);
       });
@@ -78,8 +91,10 @@
       if (p.ratio) fig.style.aspectRatio = p.ratio;
       const [rw, rh] = String(p.ratio || "3/2").split("/").map(Number);
       fig._ratio = rw / (rh || 1) || 1.5;
-      fig.innerHTML = `<img src="${p.thumb || p.src}" alt="${p.title || "Photographie de Nicolas Cartalade"}" loading="lazy" decoding="async">` +
-        (p.title ? `<figcaption class="cap">${p.title}</figcaption>` : "");
+      const title = titleOf(p);
+      const fallbackAlt = LANG === "en" ? "Photograph by Nicolas Cartalade" : "Photographie de Nicolas Cartalade";
+      fig.innerHTML = `<img src="${url(p.thumb || p.src)}" alt="${title || fallbackAlt}" loading="lazy" decoding="async">` +
+        (title ? `<figcaption class="cap">${title}</figcaption>` : "");
       fig.addEventListener("click", () => open(fig));
       io.observe(fig);
       fig._photo = p;
@@ -89,9 +104,9 @@
     // Filtres
     const cats = [...new Set(PHOTOS.map((p) => p.category).filter(Boolean))];
     if (cats.length > 1) {
-      ["Tout", ...cats].forEach((c, idx) => {
+      [ALL, ...cats].forEach((c, idx) => {
         const b = document.createElement("button");
-        b.textContent = c;
+        b.textContent = catLabel(c);
         if (idx === 0) b.classList.add("active");
         b.addEventListener("click", () => {
           filtersEl.querySelectorAll("button").forEach((x) => x.classList.remove("active"));
@@ -115,14 +130,15 @@
   // Lightbox
   function preload(i) {
     const el = visible[(i + visible.length) % visible.length];
-    if (el) { const im = new Image(); im.src = el._photo.src; }
+    if (el) { const im = new Image(); im.src = url(el._photo.src); }
   }
   function show(i) {
     current = (i + visible.length) % visible.length;
     const p = visible[current]._photo;
-    lbImg.src = p.src;
-    lbImg.alt = p.title || "";
-    lbCaption.textContent = (p.title ? p.title + "  ·  " : "") + (current + 1) + " / " + visible.length;
+    const title = titleOf(p);
+    lbImg.src = url(p.src);
+    lbImg.alt = title;
+    lbCaption.textContent = (title ? title + "  ·  " : "") + (current + 1) + " / " + visible.length;
     preload(current + 1);
     preload(current - 1);
   }
