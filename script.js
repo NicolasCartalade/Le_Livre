@@ -128,7 +128,7 @@
       fig._ratio = rw / (rh || 1) || 1.5;
       const title = titleOf(p);
       const fallbackAlt = LANG === "en" ? "Photograph by Nicolas Cartalade" : "Photographie de Nicolas Cartalade";
-      fig.innerHTML = `<img data-src="${url(p.thumb || p.src)}" alt="${title || fallbackAlt}" decoding="async">` +
+      fig.innerHTML = `<img data-src="${url(p.thumb || p.src)}" alt="${title || fallbackAlt}" decoding="async" draggable="false">` +
         (title ? `<figcaption class="cap">${title}</figcaption>` : "");
       fig.addEventListener("click", () => open(fig));
       io.observe(fig);
@@ -232,6 +232,11 @@
       }, { threshold: 0.25 }).observe(vid);
     }
   }
+
+  // Protection légère : pas de menu « Enregistrer l'image » ni de glisser-déposer sur les photos.
+  const guarded = ".hero, .gallery, .lightbox, .about-media";
+  document.addEventListener("contextmenu", (e) => { if (e.target.closest && e.target.closest(guarded)) e.preventDefault(); });
+  document.addEventListener("dragstart", (e) => { if (e.target.tagName === "IMG" || e.target.tagName === "VIDEO") e.preventDefault(); });
 
   build();
 })();
