@@ -224,3 +224,17 @@ em { font-style: italic; color: var(--accent); }
   -webkit-touch-callout: none; pointer-events: none;
 }
 .hero, .gallery, .lightbox, .about-media { -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; }
+
+/* Signature discrète en bas à droite des photos */
+.wm, .item::after, .hero::after {
+  font-family: var(--sans); font-size: .62rem; font-weight: 400; letter-spacing: .1em;
+  color: rgba(255,255,255,.62); text-shadow: 0 0 6px rgba(0,0,0,.55);
+  pointer-events: none; user-select: none; white-space: nowrap;
+}
+.item::after { content: "© Nicolas Cartalade"; position: absolute; right: .8rem; bottom: .65rem; z-index: 2; }
+.hero::after { content: "© Nicolas Cartalade"; position: absolute; right: var(--pad); bottom: 1.1rem; z-index: 2; }
+.lb-frame { position: relative; display: inline-block; line-height: 0; }
+.lb-frame .wm { position: absolute; right: .9rem; bottom: .75rem; font-size: .68rem; line-height: 1; }
+.lb-figure img { display: block; }
+.item.placeholder::after { content: none; }
+@media (max-width: 560px) { .item::after { font-size: .56rem; right: .6rem; bottom: .5rem; } }
