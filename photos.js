@@ -108,7 +108,7 @@ const PHOTOS = [
   { src: "images/ascenseur.jpg", thumb: "images/thumbs/ascenseur.jpg", title: "L'ascenseur bleu", title_en: "The blue elevator", category: "Portraits", ratio: "2333/3500" },
   { src: "images/contre-le-mur.jpg", thumb: "images/thumbs/contre-le-mur.jpg", title: "Contre le mur à Venise", title_en: "Against the wall in Venice", category: "Portraits", ratio: "2333/3500" },
   { src: "images/lumieres-de-fin-d-annee.jpg", thumb: "images/thumbs/lumieres-de-fin-d-annee.jpg", title: "Lumières de fin d'année sur Venise", title_en: "Holiday lights over Venice", category: "Portraits", ratio: "2333/3500" },
-  { src: "images/vercingetorix-sous-les-fumigenes.jpg", thumb: "images/thumbs/vercingetorix-sous-les-fumigenes.jpg", title: "Vercingétorix bravant les gaz lacrymogènes", title_en: "Vercingetorix braving the tear gas", category: "Rue", ratio: "2454/1636" },
+  { src: "images/vercingetorix-sous-les-fumigenes.jpg", thumb: "images/thumbs/vercingetorix-sous-les-fumigenes.jpg", title: "Vercingétorix bravant les gaz lacrymogènes", title_en: "Vercingetorix braving the tear gas", category: ["Rue", "Événement/Soirée"], ratio: "2454/1636" },
 ];
 
 // Noms anglais des catégories (la clé est le nom français utilisé dans PHOTOS).
